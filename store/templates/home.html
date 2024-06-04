@@ -1,0 +1,46 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Home
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="carrossel">
+        <div class="carrossel__botoes">
+            <div class="carrossel__botao">
+                <div class="carrossel__preenchimento"></div>
+            </div>
+            <div class="carrossel__botao">
+                <div class="carrossel__preenchimento"></div>
+            </div>
+        </div>
+
+        <div class="carrossel__imagens">
+            {% for banner in banners %}
+            <div class="carrossel__item">
+                <a href="{% url 'produtos' %}{{banner.link_destino}}">
+                    <img src="{{banner.imagem.url}}" alt="Imagem 1 Desktop" />
+                    <img src="{{banner.imagem.url}}" alt="Imagem 1 Mobile" />
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="banner-grid">
+        {% for banner in banners %}
+        <a href="{% url 'produtos' %}{{banner.link_destino}}" class="banner-grid__imagem">
+            <img src="{{banner.imagem.url}}" alt="{{banner.link_destino}}" />
+        </a>
+        {% endfor %}
+    </section>
+
+</main>
+
+{% endblock %}

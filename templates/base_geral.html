@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block 'title' %}{% endblock %}</title>
+    {% block 'head' %}{% endblock %}
+
+    <!--BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'store/css/style.comp.css' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+</head>
+
+<body>
+    <nav>
+        <header class="cabecalho">
+            <div class="cabecalho__menu">
+                <img class="cabecalho__menu-icone" src="{% static 'store/img/menu.svg' %}" alt="Ícone Menu" />
+                <p class="cabecalho__menu-x">X</p>
+            </div>
+
+            <div class="cabecalho__container">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'store/img/logo100.png' %}" alt="Logo Magasil" class="cabecalho__logo"
+                        style="height: 75px; height: 95px;" />
+                </a>
+
+                <nav class="cabecalho__navegacao">
+                    <ul class="cabecalho__lista">
+                        <li class="cabecalho__item-lista">
+                            <a class="cabecalho__link" href="{% url 'home' %}">HOMEPAGE</a>
+
+                            <div class="cabecalho__expansao-tipos">
+                                <a class="cabecalho__imagem-link" href="{% url 'produtos' %}"><img
+                                        src="{% static 'store/img/banner2.png' %}" alt="Imagem do menu secundário"
+                                        class="cabecalho__imagem" /></a>
+
+                                <ul class="cabecalho__lista cabecalho__lista--tipo">
+                                    {% for categoria in categorias_navegacao %}
+                                    <li><a href="{% url 'produtos' %}{{categoria.slug}}">{{categoria.nome}}</a>
+                                        {% for tipo in tipos_navegacao %}
+                                    <li>
+                                        <a class="cabecalho__link cabecalho__link--tipo"
+                                            href="{% url 'produtos'  %}{{categoria.slug}}-{{tipo.slug}}">{{tipo.nome}}</a>
+                                    </li>
+                                    {% endfor %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+            </div>
+            </li>
+
+            <li class="cabecalho__item-lista">
+                <a class="cabecalho__link" href="{% url 'produtos' %}">PRODUTOS</a>
+
+                <div class="cabecalho__expansao-tipos">
+                    <a class="cabecalho__imagem-link" href="{% url 'produtos' %}"><img
+                            src="{% static 'store/img/computador completo.png' %}" alt="Imagem do menu secundário"
+                            class="cabecalho__imagem" /></a>
+                    <ul class="cabecalho__lista cabecalho__lista--tipo">
+                        {% for categoria in categorias_navegacao %}
+                        <a href="{% url 'produtos' %}">
+                            <li>{{categoria.nome}}
+                                {% for tipo in tipos_navegacao %}
+                                <a class="cabecalho__link cabecalho__link--tipo" href="{% url 'produtos' %}">
+                            <li>{{tipo.nome}}
+                            </li>
+                        </a>
+                        {% endfor %}
+            </li></a>
+            {% endfor %}
+            </ul>
+            </div>
+            </li>
+
+            <li class="cabecalho__item-lista">
+                <a class="cabecalho__link" href="">UTEIS</a>
+
+                <div class="cabecalho__expansao-tipos">
+                    <a class="cabecalho__imagem-link" href=""><img src="{% static 'store/img/livrecomerciobr.png' %}"
+                            alt="Imagem do menu secundário" class="cabecalho__imagem" /></a>
+
+                    <ul class="cabecalho__lista cabecalho__lista--tipo">
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo" href="">Sobre a Empresa</a>
+                        </li>
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo" href="">Política de
+                                Privacidade</a>
+                        </li>
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo" href="">Termos de Uso</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </li>
+
+
+            <li class="cabecalho__item-lista">
+                <a class="cabecalho__link cabecalho__link--ofertas" href="">Projetos</a>
+
+                <div class="cabecalho__expansao-tipos">
+                    <a class="cabecalho__imagem-link" href=""><img src="{% static 'store/img/dia do programador.png' %}"
+                            alt="Imagem do menu secundário" class="cabecalho__imagem" /></a>
+                    <ul class="cabecalho__lista cabecalho__lista--tipo">
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo"
+                                href="https://valbaby-94de47026eac.herokuapp.com/loja/homepage/">Valbaby</a>
+                        </li>
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo"
+                                href="https://www.vandermakveiculos.com/homepage/">Vandermak</a>
+                        </li>
+                        <li>
+                            <a class="cabecalho__link cabecalho__link--tipo"
+                                href="https://movieflixbr-3ff670d4d6fb.herokuapp.com/filmes/homefilmes/">MovieFlix</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            {% if vendas %}
+            <li class="cabecalho__item-lista">
+                <a class="cabecalho__link" href="{%  url 'gerenciar_loja' %}">Gerenciar Loja</a>
+
+            </li>
+            {% endif %}
+
+            </ul>
+
+
+    </nav>
+    </div>
+
+    <div class="cabecalho__icones">
+        <div class="cabecalho__icone-login">
+            <!-- Para trocar o ícone basta adicionar a classe 'cabecalho__link-icone--logado' na âncora abaixo -->
+            {% if request.user.is_authenticated %}
+            <a class="cabecalho__link-icone cabecalho__link-icone--logado" href="javascript: void(0)">
+                {% else %}
+                <a class="cabecalho__link-icone " href="javascript: void(0)">
+                    {% endif %}
+                    <svg class="cabecalho__icone" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8 1.333a3.332 3.332 0 100 6.662 3.332 3.332 0 100-6.662zM3.334 4.664A4.665 4.665 0 018 0a4.665 4.665 0 110 9.328 4.665 4.665 0 01-4.666-4.664zm2 8.662A3.333 3.333 0 002 16.657v1.996h12v-1.996a3.333 3.333 0 00-3.333-3.333H5.334zM.667 16.657a4.666 4.666 0 014.667-4.666h5.333a4.666 4.666 0 014.667 4.666v3.33H.667v-3.33z"
+                            fill="inherit" />
+                    </svg>
+                    <svg class="cabecalho__icone cabecalho__icone--logado" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16.8496 15.3103C15.526 13.6954 12.9549 12.5999 9.99992 12.5999C7.04496 12.5999 4.47379 13.6954 3.15028 15.3103M16.8496 15.3103C17.9885 13.8434 18.6666 12.0009 18.6666 9.99992C18.6666 5.21345 14.7864 1.33325 9.99992 1.33325C5.21345 1.33325 1.33325 5.21345 1.33325 9.99992C1.33325 12.0009 2.01135 13.8434 3.15028 15.3103M16.8496 15.3103C15.264 17.3525 12.7854 18.6666 9.99992 18.6666C7.21439 18.6666 4.7358 17.3525 3.15028 15.3103M13.4666 7.39992C13.4666 9.31451 11.9145 10.8666 9.99992 10.8666C8.08533 10.8666 6.53325 9.31451 6.53325 7.39992C6.53325 5.48533 8.08533 3.93325 9.99992 3.93325C11.9145 3.93325 13.4666 5.48533 13.4666 7.39992Z"
+                            stroke="inherit" />
+                    </svg>
+                </a>
+
+                <!-- Para exibir o menu do perfil, basta adicionar a classe 'cabecalho__informacoes-perfil--aberto' na div abaixo -->
+                {% if request.user.is_authenticated %}
+                <div class="cabecalho__informacoes-perfil">
+                    <p class="cabecalho__texto">Olá, <span>{{request.user}}</span>!</p>
+                    <a class="cabecalho__link cabecalho__link--perfil" href="{% url 'minha_conta' %}">Minha Conta</a>
+                    <a class="cabecalho__link cabecalho__link--perfil" href="{% url 'meus_pedidos' %}">Meus Pedidos</a>
+                    <hr />
+                    <a class="cabecalho__link cabecalho__link--perfil" href="{% url 'sair' %}">Sair</a>
+                </div>
+                {% else %}
+                <div class="cabecalho__informacoes-perfil ">
+                    <p class="cabecalho__texto">Olá, <span>Visitante</span>!</p>
+                    <a class="cabecalho__link cabecalho__link--perfil" href="{% url 'logar' %}">Fazer Login</a>
+                    <a class="cabecalho__link cabecalho__link--perfil" href="{% url 'cadastro' %}">Criar Conta</a>
+                    <hr />
+                    <a class="cabecalho__link cabecalho__link--perfil" href="">Recuperar Senha</a>
+                </div>
+                {% endif %}
+        </div>
+
+        <div class="cabecalho__icone-carrinho">
+            <a class="cabecalho__link-icone" href="{% url 'carrinho' %}">
+                <i class="bi bi-cart-check"></i>
+            </a>
+            <div class="cabecalho__itens cabecalho__itens--visivel">{{qtd_prod_carrinho}}</div>
+        </div>
+    </div>
+    </header>
+    </nav>
+    {% block 'body' %}{% endblock %}
+
+    {% include 'rodape.html' %}
+
+    <script src="{% static 'store/js/checkout.js' %}"></script>
+    <script src="{% static 'store/js/home.js' %}"></script>
+    <script src="{% static 'store/js/loja.js' %}"></script>
+    <script src="{% static 'store/js/main.js' %}"></script>
+    <script src="{% static 'store/js/produto.js' %}"></script>
+    <script src="{% static 'store/js/scripts.js' %}"></script>
+    <script src="{% static 'store/js/slider.js' %}"></script>
+
+</body>
+
+</html>

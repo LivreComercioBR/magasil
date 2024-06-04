@@ -1,0 +1,81 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Cadastrar Endereço
+{% endblock %}
+
+{% block 'head' %}{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+  <section class="conta">
+    <div class="conta__container">
+      <div class="checkout__titulos">
+        <p class="checkout__titulo">Cadastrar Endereco de Entrega</p>
+      </div>
+
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert {{message.tags}}">
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <form class="conta__form" action="{% url 'cadastrar_endereco' %}" method="POST">{% csrf_token %}
+        <div class="conta__item">
+          <label for="nome_endereco">Nome do Endereco</label>
+          <input name="nome_endereco" type="text" placeholder="Por exemplo: Casa, Trabalho, casa de praia..." />
+        </div>
+
+        <div class="conta__item">
+          <label for="estado">Estado</label>
+          <input name="estado" type="text" />
+        </div>
+
+        <div class="conta__item">
+          <label for="rua">Rua</label>
+          <input name="rua" type="text" />
+        </div>
+
+        <div class="conta__item">
+          <label for="ponto_referencia">Ponto de Referência</label>
+          <input name="ponto_referencia" type="text" />
+        </div>
+
+        <div class="conta__item">
+          <label for="cidade">Cidade</label>
+          <input name="cidade" type="text" />
+        </div>
+        <div class="conta__item">
+          <label for="cep">CEP</label>
+          <input name="cep" type="number" />
+        </div>
+
+        <div class="conta__item">
+          <label for="numero">Número</label>
+          <input name="numero" type="number" />
+        </div>
+
+        <div class="conta__item">
+          <label for="recebedor">Recebedor</label>
+          <input name="recebedor" type="text" placeholder="Quem vai receber esta entrega?" />
+        </div>
+
+        <div class="conta__item">
+          <label for="bairro">Bairro</label>
+          <input name="bairro" type="text" />
+        </div>
+
+        <button class="subtotal__botao" type="submit">
+          Cadastrar Endereco
+        </button>
+      </form>
+      <a href="{% url 'checkout' %}" class="subtotal__botao">
+        Retornar ao checkout
+      </a>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Meus Pedidos
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Quem é a Livre Comércio BR</p>
+            </div>
+
+            <div class="pedido">
+                <p>Somos uma empresa de empreendedores no ramo da tecnologia voltada para a construção de sites web para
+                    pequenas e médias empresas.</p>
+                <br>
+                <p>Quer expandir a sua empresa para o mundo? Nós temos a solução para globalizar a sua empresa sem
+                    precisar investir rios de dinheiro. Com um pequeno investimento é possível levar a sua empresa pelo
+                    mundo afora.</p>
+                <br>
+                <h3><b>Missão</b></h3>
+                <br>
+                <p>Nossa missão e contribuir com soluções simples e ágeis que possam resolver problemas complexos, pois
+                    é assim que acreditamos que a tecnologia trabalha ao nosso favor, soluções simples para resolver
+                    problemas complexos.</p>
+                <br>
+                <p>Nossa missão é contribuir para que cada dia, o mundo esteja mais conectado, diminuindo as distâncias
+                    e barreiras que dificultam o mercado local, regional e global.</p>
+                <br>
+                <h3><b>Valores</b></h3>
+                <br>
+                <p>Nossos valores pautam-se na transparência e fidelidade com os nossos compromissos assumidos para que
+                    possamos ter uma relação sólida e duradoura.</p>
+                <br>
+                <h3><b>Visão</b></h3>
+                <br>
+                <p>Nossa visão é de que, com persistência, muito esforço, dedicação, dignidade, cordialidade e fidalguia
+                    possamos satisfazer as necessidades dos nossos clientes e contribuir para um mundo melhor. Se
+                    atingirmos tal feito, teremos cumprido nossa missão em contribuir com as gerações futuras e com
+                    certeza, teremos sido uma empresa de sucesso.</p>
+
+
+            </div>
+
+            <div>
+                <a href="{% url 'produtos' %}">Voltar à Loja</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

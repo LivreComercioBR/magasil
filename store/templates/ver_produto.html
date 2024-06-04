@@ -1,0 +1,153 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Produto
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal principal--padding-b principal--gap">
+  <section class="s-produto">
+    <div class="s-produto__carrossel">
+      <div class="s-produto__carrossel-itens">
+        <div class="s-produto__carrossel-img">
+          <img src="{{produto.imagem.all.0}}" alt="Imagem Carrossel {{produto.id}}" />
+        </div>
+        {% for img in produto.imagem.all %}
+        <div class="s-produto__carrossel-img" style="overflow: hidden;">
+          <img src="{{img}}" alt="Imagem Carrossel {{img.id}}" style="transform: scale(1.1);" />
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="s-produto__carrossel-botoes">
+        <div class="s-produto__carrossel-botao s-produto__carrossel-botao--selecionado"></div>
+        <div class="s-produto__carrossel-botao"></div>
+        <div class="s-produto__carrossel-botao"></div>
+        <div class="s-produto__carrossel-botao"></div>
+        <div class="s-produto__carrossel-botao"></div>
+      </div>
+    </div>
+
+    <div class="s-produto__informacoes">
+      <div class="s-produto__breadcrumbs">
+        <span><a href="{% url 'produtos' %}">Home</a></span>
+        <span><a href="{% url 'produtos' %}{{categoria.nome}}">{{produto.categoria.nome}}</a></span>
+        <span><a href="{% url 'produtos' %}{{categoria.nome}}{{tipo.nome}}">{{produto.tipo.nome}}</a></span>
+        <span>
+          <p>{{produto.nome}}</p>
+        </span>
+      </div>
+
+      <div class="s-produto__infos">
+        <h1 class="s-produto__titulo">{{produto.nome}}</h1>
+
+        <p class="s-produto__preco">R$ {{produto.preco}}</p>
+        <p class="produto__parcelado"><b>5x R$ {{produto.parcelar}}</b><sup></sup></p>
+        <p class="s-produto__descricao-titulo">Selecione uma cor para ver os tamanhos disponíveis</p>
+        <form class="s-produto__infos" action="{% url 'add_carrinho' produto.id %}" method="POST">
+          {% csrf_token %}
+          {% if tem_estoque %}
+          {% if cor_selecionada %}
+          <p>Cor: <span>{{cor_selecionada}}</span></p>
+          {% endif %}
+
+          <div class="s-produto__cor">
+
+            <div class="s-produto__cores">
+              {% for cor in cores %}
+              <a href="{% url 'ver_produto' produto.id cor.id %}">
+                <div class="s-produto__cores-item" style="background-color: {{cor.codigo}}"></div>
+              </a>
+              {% endfor %}
+            </div>
+
+          </div>
+
+
+          {% else %}
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert {{message.tags}}">
+            {{message}}
+          </div>
+          {% endfor %}
+          {% endif %}
+
+          {% endif %}
+
+          {% if tem_estoque %}
+          {% if tamanhos %}
+          <div class="s-produto__tamanho">
+            <div>
+              Tamanho
+            </div>
+            <div class="s-produto__tamanhos ">
+
+              {% for tamanho in tamanhos %}
+              <div class="menu__tamanho">
+                <label for="{{tamanho}}" class="s-produto__tamanhos-item">{{tamanho}}</label>
+                <input class="menu__checkbox" type="radio" name="tamanho" value="{{ tamanho}}">
+              </div>
+              {% endfor %}
+
+            </div>
+
+          </div>
+          {% endif %}
+      </div>
+      <input type="hidden" name="cor" value="{{cor_selecionada.id}}">
+      <button type="submit" class="s-produto__adicicionar">Adicionar à sacola</button>
+      </form>
+      <a class="s-produto__adicicionar" href="{% url 'produtos' %}">Retornar</a>
+      {% else %}
+      <h3>Hum, que pena! Estamos sem estoque deste produto</h3>
+      {% endif %}
+      <div class="s-produto__descricao">
+        <p class="s-produto__descricao-titulo">Descrição do produto</p>
+        <div class="s-produto__descricao-textos">
+          <p>
+            {{produto.descricao}}
+          </p>
+          <p>
+            CÓDIGO DO PRODUTO <br />
+            Ref: <span>{{produto.id}}</span>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="similares">
+    {% if similares %}
+    <h2 class="similares__titulo">
+      Gostou desse produto? Veja itens similares
+    </h2>
+
+    <div class="similares__container">
+      {% for similar in similares %}
+      <a href="{% url 'ver_produto' similar.id %}" class="produto">
+        <div class="produto__imagem">
+          <img src="{{similar.imagem.all.0}}" alt="Imagem do Produto" />
+        </div>
+        <div class="produto__textos">
+          <p class="produto__titulo">{{similar.nome}}</p>
+          <div class="produto__preco">
+            <p class="produto__avista">R$ {{similar.preco}}</sup></p>
+
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+</main>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Cadastro
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Preencha seus Dados Para Criar a sua Conta</p>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form class="conta__form" action="{% url 'cadastro' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="conta__item conta__item--email">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" placeholder="Seu melhor email" />
+                </div>
+
+                <div class="conta__item">
+                    <label for="password">Senha</label>
+                    <input name="password" type="password" />
+                </div>
+
+                <div class="conta__item">
+                    <label for="confirmar_senha">Confirmar Senha</label>
+                    <input name="confirmar_senha" type="password" />
+                </div>
+
+                <button class="subtotal__botao" type="submit">
+                    Cadastrar
+                </button>
+            </form>
+            <a href="{% url 'logar' %}">Já possui uma conta? Fazer login</a>
+
+        </div>
+    </section>
+</main>
+{% endblock %}

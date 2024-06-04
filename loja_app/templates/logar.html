@@ -1,0 +1,52 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Login
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Informe seus Dados Para Acessar a sua Conta</p>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+            <form class="conta__form" action="{% url 'logar' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="conta__item">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" />
+                </div>
+
+                <div class="conta__item">
+                    <label for="password">Senha</label>
+                    <input name="password" type="password" />
+                </div>
+
+
+                <button class="subtotal__botao" type="submit">
+                    Logar
+                </button>
+            </form>
+            <a href="{% url 'cadastro' %}">Ainda não tem conta? Criar conta</a>
+            <a href="{%  url 'password_reset' %}">Esqueci minha senha! Recuperar</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

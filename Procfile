@@ -1,0 +1,1 @@
+web: gunicorn loja_pro.wsgi --log-file -

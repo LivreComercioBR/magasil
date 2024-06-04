@@ -1,0 +1,53 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Alterar senha
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Preencha os Dados Abaixo Para Alterar a sua Senha</p>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form class="conta__form" action="{% url 'alterar_senha' %}" method="POST">
+                {% csrf_token %}
+                <div class="conta__item">
+                    <label for="password">Senha Atual</label>
+                    <input name="senha_atual" type="password" />
+                </div>
+                <br>
+                <div class="conta__item">
+                    <label for="password">Nova Senha</label>
+                    <input name="new_password" type="password" />
+                </div>
+                <br>
+                <div class="conta__item">
+                    <label for="confirmar_senha">Confirmar Senha</label>
+                    <input name="confirmar_password" type="password" />
+                </div>
+
+                <button class="subtotal__botao" type="submit">
+                    Alterar Senha
+                </button>
+            </form>
+
+        </div>
+    </section>
+</main>
+{% endblock %}

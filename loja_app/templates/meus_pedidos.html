@@ -1,0 +1,77 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Meus Pedidos
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Meus pedidos</p>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{message.tags}}">
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+            {% for pedido in pedidos %}
+            <div class="pedido">
+                <div class="pedido__cabecalho">
+                    <div>
+                        <p><b>Data do pedido</b></p>
+                        <p>{{pedido.data_finalizacao}}</p>
+                    </div>
+
+                    <div>
+                        <p><b>Total</b></p>
+                        <p>R$ {{pedido.total}}</p>
+                    </div>
+
+                    <div>
+                        <p><b>Número do pedido</b></p>
+                        <p>{{pedido.id}}</p>
+                    </div>
+                    <div>
+                        <p><b>Endereço:</b> {{pedido.endereco.nome_endereco}}</p>
+                    </div>
+                </div>
+
+                <div class="pedido__corpo">
+                    {% for item in pedido.itens %}
+                    <div class="tabela__imagem">
+
+                        <img src="{{ item.item_estoque.produto.imagem.all.0 }}"
+                            alt="{{item.item_estoque.produto.nome}}" />
+                    </div>
+                    <div class="tabela__produto-textos">
+                        <p><b>Produto: {{item.item_estoque.produto.nome}}</b></p>
+                        <p><b>Quantidade:</b> {{item.quantidade}}</p>
+                        <p><b>Preço:</b> {{item.item_estoque.produto.preco}}</p>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            {% endfor %}
+
+            <div>
+                <a href="{% url 'produtos' %}">Voltar à Loja</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

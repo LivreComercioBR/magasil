@@ -1,0 +1,70 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Pedido aprovado
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+    <section class="conta">
+        <div class="conta__container">
+            <div class="checkout__titulos">
+                <p class="checkout__titulo">Parabéns, seu pedido foi aprovado!</p>
+            </div>
+            <h3>Enviamos um email para você com todos os detalhes do seu pedido</h3>
+
+            <div class="pedido">
+                <div class="pedido__cabecalho">
+                    <div>
+                        <p><b>Data do pedido</b></p>
+                        <p>{{pedido.data_finalizacao}}</p>
+                    </div>
+
+                    <div>
+                        <p><b>Total</b></p>
+                        <p>R$ {{pedido.total}}</p>
+                    </div>
+
+                    <div>
+                        <p><b>Número do pedido</b></p>
+                        <p>{{pedido.id}}</p>
+                    </div>
+                    <div>
+                        <p><b>Endereço:</b> {{pedido.endereco.nome_endereco}}</p>
+                    </div>
+                </div>
+
+
+                <div class="pedido__corpo">
+                    {% for prod in produtos %}
+                    <div class="tabela__imagem">
+
+                        <img src="{{ prod.item_estoque.produto.imagem.all.0 }}" alt="Imagem do Produto" />
+                    </div>
+                    <div class="tabela__produto-textos">
+                        <p><b>Produto: {{prod.item_estoque.produto.nome}}</b></p>
+                        <p><b>Quantidade:</b> {{prod.quantidade}}</p>
+                        <p><b>Cor:</b> {{prod.item_estoque.produto.cor.nome}}</p>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <a href="{% url 'produtos' %}">Voltar à Loja</a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+</main>
+
+{% endblock %}

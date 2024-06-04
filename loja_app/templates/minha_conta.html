@@ -1,0 +1,63 @@
+{% extends 'base_geral.html' %}
+{% load static %}
+
+{% block 'title' %}
+Alterar meus dados
+{% endblock %}
+
+{% block 'head' %}
+
+{% endblock %}
+
+{% block 'body' %}
+<main class="principal">
+  <section class="conta">
+    <div class="conta__container">
+      <div class="checkout__titulos">
+        <p class="checkout__titulo">Dados pessoais</p>
+      </div>
+
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert {{message.tags}}">
+        {{message}}
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <form class="conta__form" action="#" method="POST">{% csrf_token %}
+        <div class="conta__item">
+          <label for="nome">Nome</label>
+          <input name="nome" type="text" value="" />
+        </div>
+
+        <div class="conta__item">
+          <label for="lastname">Sobrenome</label>
+          <input name="lastname" type="text" placeholder="{{request.user.cliente.sobrenome}}" />
+        </div>
+
+        <div class="conta__item conta__item--email">
+          <label for="email">E-mail</label>
+          <input name="email" type="email" placeholder="{{request.user.email}}" />
+        </div>
+
+        <div class="conta__item">
+          <label for="cpf">CPF</label>
+          <input name="cpf" type="number" />
+        </div>
+
+        <div class="conta__item">
+          <label for="phone">Telefone</label>
+          <input name="phone" type="number" />
+        </div>
+
+        <button class="subtotal__botao" type="submit">
+          Salvar alterações
+        </button>
+      </form>
+      <a href="{% url 'alterar_senha' %}">Deseja alterar senha? Clique aqui</a>
+    </div>
+  </section>
+</main>
+
+{% endblock %}
