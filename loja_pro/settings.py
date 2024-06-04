@@ -162,13 +162,13 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
 # Configuration
-cloudinary.config(
-    cloud_name="hbvmmhyxq",
-    api_key="228761186617816",
-    # Click 'View Credentials' below to copy your API secret
-    api_secret="f357lonF3XzSVQUoay8f2y-kBB8",
-    secure=True
-)
+CLOUDINARY_STORARE = {
+    "CLOUD_NAME": "hbvmmhyxq",
+    "API_KEY": "228761186617816",
+    "API_SECRET": "f357lonF3XzSVQUoay8f2y-kBB8",
+    "SECURE": "True"
+}
+
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
