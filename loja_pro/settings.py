@@ -4,6 +4,8 @@ from pathlib import Path
 import os
 from decouple import config
 import django_heroku
+import cloudinary
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,9 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost",
+                 "magasil-efcc0afa7d9a.herokuapp.com/"]
 
 
 # Application definition
@@ -32,8 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'loja_app',
     'store',
-    # 'cloudinary_storage',
-    # 'cloudinary',
+    'cloudinary_storage',
+    'cloudinary',
 
 ]
 
@@ -157,5 +160,16 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+
+# Configuration
+cloudinary.config(
+    cloud_name="hbvmmhyxq",
+    api_key="228761186617816",
+    # Click 'View Credentials' below to copy your API secret
+    api_secret="f357lonF3XzSVQUoay8f2y-kBB8",
+    secure=True
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 django_heroku.settings(locals())
