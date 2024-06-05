@@ -18,10 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost",
-                 "magasil-efcc0afa7d9a.herokuapp.com/"]
+                 "magasil-efcc0afa7d9a.herokuapp.com"]
 
 
 # Application definition
@@ -32,10 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'loja_app',
     'store',
-    'cloudinary_storage',
     'cloudinary',
 
 ]
@@ -162,11 +162,10 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
 # Configuration
-CLOUDINARY_STORARE = {
+CLOUDINARY_STORAGE = {
     "CLOUD_NAME": "hbvmmhyxq",
     "API_KEY": "228761186617816",
     "API_SECRET": "f357lonF3XzSVQUoay8f2y-kBB8",
-    "SECURE": "True"
 }
 
 
