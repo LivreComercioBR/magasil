@@ -22,14 +22,14 @@ Home
         </div>
 
         <div class="carrossel__imagens">
-            {% for banner in banners %}
+
             <div class="carrossel__item">
                 <a href="{% url 'produtos' %}{{banner.link_destino}}">
-                    <img src="{{banner.imagem.url}}" alt="Imagem 1 Desktop" />
-                    <img src="{{banner.imagem.url}}" alt="Imagem 1 Mobile" />
+                    <img src="{% static 'store/img/banner2.png' %}" alt="Banner 2 Desktop" />
+                    <img src="{% static 'store/img/banner4.png' %}" alt="Banner 4 Mobile" />
                 </a>
             </div>
-            {% endfor %}
+
         </div>
     </section>
 
